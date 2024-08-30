@@ -19,7 +19,7 @@ public class AgendaMain {
     
     public static void main(String[] args){        
         AgendaMain agendaMain=new AgendaMain();
-        agendaMain.menu();
+        agendaMain.menu();        
     }
     
    private void menu(){        
@@ -52,6 +52,7 @@ public class AgendaMain {
         catch(Exception e) {
             System.out.println(e.toString());
         }
+        scr.close();
     }
     
    private void registrarPersona(){
