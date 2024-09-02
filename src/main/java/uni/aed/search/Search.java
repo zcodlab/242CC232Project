@@ -16,4 +16,18 @@ public class Search {
             return loc;                    
     }
     
+    public int searchBinaria(Integer[] X,int valor){
+        int bajo=0, alto=X.length, medio=(bajo+alto)/2;
+        while(bajo<=alto && X[medio]!=valor){
+            if(X[medio]<valor)
+                bajo=medio+1;
+            else
+                alto=medio-1;
+            medio=(bajo+alto)/2;
+        }
+        if(bajo>alto)
+            medio=NO_ENCONTRADO;        
+        return medio;
+    }
+    
 }
