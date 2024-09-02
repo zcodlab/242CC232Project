@@ -28,7 +28,7 @@ public class AgendaMain {
         try{            
             do			
             {	
-                System.out.print("Reserva de pasajes con Listas Enalazadas"+SEPARADOR+
+                System.out.print("Agenda Electrónica"+SEPARADOR+
                 "1.- Registrar Persona "+SEPARADOR+
                 "2.- Imprimir Agenda "+SEPARADOR+
                 "3.- Imprimir Edad Promedio "+SEPARADOR+                                
