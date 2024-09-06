@@ -8,6 +8,7 @@ import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import uni.aed.search.Search;
+import uni.aed.sort.Sort;
 
 /**
  *
@@ -15,6 +16,7 @@ import uni.aed.search.Search;
  */
 public class FrmSortSearchOperations extends javax.swing.JFrame {
     private final DefaultListModel dlmInicial=new DefaultListModel();
+    private final DefaultListModel dlmFinal=new DefaultListModel();
     private final String CADENA_VACIA="";
     private final int NO_ENCONTRADO=-1;
     private int result=NO_ENCONTRADO;
@@ -25,6 +27,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
     public FrmSortSearchOperations() {
         initComponents();
         jlInicial.setModel(dlmInicial);
+        jlFinal.setModel(dlmFinal);
     }
     
     private void Insertar(){
@@ -63,7 +66,51 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         }
     }
     private void searchBinaria(){
+        int N=dlmFinal.size();
+        if(N<1)
+        { JOptionPane.showMessageDialog(this, "La lista se encuentra vacia",
+                "ERROR", JOptionPane.ERROR_MESSAGE);            
+          return;
+        }
+        //validar que se haya consignado el elemento a buscar
+        if(jtfData.getText().isEmpty())
+        { JOptionPane.showMessageDialog(this, "Debe consignar el valor que desea buscar",
+                "ERROR", JOptionPane.ERROR_MESSAGE);            
+          return;
+        }
+        Integer[] X=Arrays.stream(dlmFinal.toArray())
+                .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
+        Search search=new Search();
+        result=search.searchBinaria(X, Integer.parseInt(jtfData.getText()));
+        if(result==search.NO_ENCONTRADO)
+            JOptionPane.showMessageDialog(this, "El valor buscado no se encontro en la lista",
+                "WARNING", JOptionPane.WARNING_MESSAGE);            
+        else{
+            jlFinal.setSelectedIndex(result);//Seleccion el row con el valor
+            jlFinal.requestFocusInWindow();//coloca el foco en la lista
+            jlFinal.requestFocus();
+            JOptionPane.showMessageDialog(this, "El valor buscado se encontro en la lista en el registro " 
+                    + (result + 1),"EXITO", JOptionPane.PLAIN_MESSAGE);            
+        }
         
+    }
+    private void Sort(){
+        int N=dlmInicial.size();
+        if(N<1)
+        { JOptionPane.showMessageDialog(this, "La lista se encuentra vacia",
+                "ERROR", JOptionPane.ERROR);            
+          return;
+        }        
+        Integer[] X=Arrays.stream(dlmInicial.toArray())
+                .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
+        Sort sort=new Sort();
+        sort.setY(X);
+        switch(jcbSort.getSelectedIndex()){
+            case 0 ->{ X=sort.selectionWuSort();}
+        }
+        dlmFinal.removeAllElements();
+        for(Integer x:X)
+            dlmFinal.addElement(x);
     }
 
     /**
@@ -176,6 +223,11 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         jcbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", " " }));
 
         jbSort.setText("Sort");
+        jbSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSortActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -243,8 +295,16 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
 
     private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
         // TODO add your handling code here:
-        searchLineal();
+        if(jrbSearchLineal.isSelected())
+            searchLineal();
+        if(jrbSearchBinaria.isSelected())
+            searchBinaria();
     }//GEN-LAST:event_jbSearchActionPerformed
+
+    private void jbSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSortActionPerformed
+        // TODO add your handling code here:
+        Sort();
+    }//GEN-LAST:event_jbSortActionPerformed
 
     /**
      * @param args the command line arguments

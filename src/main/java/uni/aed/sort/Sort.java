@@ -3,6 +3,9 @@ package uni.aed.sort;
 public class Sort {
     private Integer[] Y;
 
+    public Sort() {
+    }
+
     public Sort(int N) {
         this.Y = new Integer[N];
     }
