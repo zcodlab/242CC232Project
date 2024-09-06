@@ -107,6 +107,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         sort.setY(X);
         switch(jcbSort.getSelectedIndex()){
             case 0 ->{ X=sort.selectionWuSort();}
+            case 1 ->{X=sort.bubbleWuSort();}
         }
         dlmFinal.removeAllElements();
         for(Integer x:X)
@@ -220,7 +221,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         jlFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Ordenados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
         jScrollPane2.setViewportView(jlFinal);
 
-        jcbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", " " }));
+        jcbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", "Burbuja" }));
 
         jbSort.setText("Sort");
         jbSort.addActionListener(new java.awt.event.ActionListener() {
