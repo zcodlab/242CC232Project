@@ -42,4 +42,25 @@ public class Sort {
         return X;
     }
     
+    public Integer[] bubbleWuSort(){
+        if(Y==null) return null;
+        Integer[] X=Y.clone();
+        int temp,bottom,i;
+        boolean exchanged=true;
+        bottom=X.length-2;
+        while(exchanged){
+            exchanged=false;
+            for(i=0;i<=bottom;i++){
+                if(X[i]>X[i+1]){
+                    temp=X[i];
+                    X[i]=X[i+1];
+                    X[i+1]=temp;
+                    exchanged=true;                    
+                }
+            }
+            bottom--;
+        }
+        return X;
+    }
+    
 }
