@@ -110,12 +110,20 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         Sort sort=new Sort();
         sort.setY(X);
         switch(jcbSort.getSelectedIndex()){
-            case 0 ->{ X=sort.selectionWuSort();}
-            case 1 ->{X=sort.bubbleWuSort();}
+            case 0 ->{ X=sort.selectionWuSort();
+                        jtfComplejidad.setText(sort.SELECCION_COMPLEJIDAD_WORSTCASE);
+                        }
+            case 1 ->{X=sort.bubbleWuSort();
+                        jtfComplejidad.setText(sort.BURBUJA_COMPLEJIDAD_WORSTCASE);
+                     }
+            case 2 ->{X=sort.insercionBinariaSort();
+                        jtfComplejidad.setText(sort.INSERCIONBINARIA_COMPLEJIDAD_WORSTCASE);
+                        }
         }
         dlmFinal.removeAllElements();
         for(Integer x:X)
-            dlmFinal.addElement(x);
+            dlmFinal.addElement(x);        
+        jtfComparaciones.setText(Integer.toString(sort.getnComp()));
     }
 
     /**
@@ -229,7 +237,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         jlFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Ordenados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
         jScrollPane2.setViewportView(jlFinal);
 
-        jcbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", "Burbuja" }));
+        jcbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", "Burbuja", "Insercion Binaria" }));
 
         jbSort.setText("Sort");
         jbSort.addActionListener(new java.awt.event.ActionListener() {
