@@ -54,6 +54,8 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
                 .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
         Search search=new Search();
         result=search.searchLineal(X, Integer.parseInt(jtfData.getText()));
+        jtfComplejidad.setText(search.SEARCH_LINEAL_COMPLEJIDAD_WORSTCASE);
+        jtfComparaciones.setText(Integer.toString(search.getnComp()));
         if(result==search.NO_ENCONTRADO)
             JOptionPane.showMessageDialog(this, "El valor buscado no se encontro en la lista",
                 "WARNING", JOptionPane.WARNING_MESSAGE);            
@@ -82,6 +84,8 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
                 .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
         Search search=new Search();
         result=search.searchBinaria(X, Integer.parseInt(jtfData.getText()));
+        jtfComplejidad.setText(search.SEARCH_BINARY_COMPLEJIDAD_WORSTCASE);
+        jtfComparaciones.setText(Integer.toString(search.getnComp()));
         if(result==search.NO_ENCONTRADO)
             JOptionPane.showMessageDialog(this, "El valor buscado no se encontro en la lista",
                 "WARNING", JOptionPane.WARNING_MESSAGE);            
@@ -137,6 +141,10 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         jlFinal = new javax.swing.JList<>();
         jcbSort = new javax.swing.JComboBox<>();
         jbSort = new javax.swing.JButton();
+        jtfComparaciones = new javax.swing.JTextField();
+        jtfComplejidad = new javax.swing.JTextField();
+        jlComparaciones = new javax.swing.JLabel();
+        jlComplejidad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Algoritmos de Busqueda y Ordenamiento");
@@ -230,6 +238,21 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
             }
         });
 
+        jtfComparaciones.setEditable(false);
+        jtfComparaciones.setBackground(new java.awt.Color(204, 204, 204));
+
+        jtfComplejidad.setEditable(false);
+        jtfComplejidad.setBackground(new java.awt.Color(204, 204, 204));
+        jtfComplejidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfComplejidadActionPerformed(evt);
+            }
+        });
+
+        jlComparaciones.setText("#Comparaciones");
+
+        jlComplejidad.setText("Complejidad Asintótica:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -237,31 +260,50 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jcbSort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(jbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jbSort)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlComparaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfComparaciones)
+                            .addComponent(jtfComplejidad))
+                        .addGap(12, 12, 12)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jcbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbSort)
+                .addGap(18, 18, 18)
+                .addComponent(jbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfComparaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlComparaciones))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -274,7 +316,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,6 +348,10 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         // TODO add your handling code here:
         Sort();
     }//GEN-LAST:event_jbSortActionPerformed
+
+    private void jtfComplejidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfComplejidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfComplejidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,10 +398,14 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
     private javax.swing.JButton jbSearch;
     private javax.swing.JButton jbSort;
     private javax.swing.JComboBox<String> jcbSort;
+    private javax.swing.JLabel jlComparaciones;
+    private javax.swing.JLabel jlComplejidad;
     private javax.swing.JList<String> jlFinal;
     private javax.swing.JList<String> jlInicial;
     private javax.swing.JRadioButton jrbSearchBinaria;
     private javax.swing.JRadioButton jrbSearchLineal;
+    private javax.swing.JTextField jtfComparaciones;
+    private javax.swing.JTextField jtfComplejidad;
     private javax.swing.JTextField jtfData;
     // End of variables declaration//GEN-END:variables
 }
