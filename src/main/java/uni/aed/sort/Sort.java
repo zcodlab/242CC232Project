@@ -174,5 +174,78 @@ public class Sort {
         return Y;
     }   
     
+    public Integer[] CallQuickSort(){
+        if(Y==null) return null;
+        Integer[] X=Y.clone();
+        return QuickSort(X,0,X.length - 1);
+    }
+            
+    private Integer[] QuickSort(Integer[] X, int start,int end){
+        if(start < end)
+        {
+            int pIndex=QuickSortPartition(X,start,end);
+            QuickSort(X,start,pIndex-1);
+            QuickSort(X,pIndex+1,end);
+        }
+        return X;
+    }
+    private int QuickSortPartition(Integer[] X, int start,int end){
+        int pivot=X[end];
+        int pIndex=start;
+        for(int i=start;i<end;i++){
+            if(X[i]<=pivot){
+                intercambio(X,i,pIndex);
+                pIndex++;
+            }
+        }//end for
+        intercambio(X,pIndex,end);
+        return pIndex;
+    }
+    public Integer[] CallMergeSort(){
+        if(Y==null) return null;
+        Integer[] X=Y.clone();
+        return MergeSort(X);
+    }
+    
+    private Integer[] MergeSort(Integer[] X){
+        int n=X.length;
+        if(n<2) return X; //n=1 -> ya llego al caso base
+        int mid=n/2;
+        Integer[] left=new Integer[mid];
+        Integer[] right=new Integer[n-mid];
+        for(int i=0;i<mid;i++)
+            left[i]=X[i];
+        for(int i=mid;i<n;i++)
+            right[i-mid]=X[i];
+        MergeSort(left);
+        MergeSort(right);
+        Merge(X,left,right);
+        return X;        
+    }
+    private void Merge(Integer[] X,Integer[] left,Integer[] right){
+        int nL=left.length;
+        int nR=right.length;
+        int i=0,j=0,k=0;
+        while(i <nL && j<nR){
+            if(left[i]<=right[j]){
+                X[k]=left[i];
+                i++;
+            }else{
+                X[k]=right[j];
+                j++;
+            }
+            k++;
+        }
+        while(i<nL){//trasladar los elementos sobrantes de L1
+            X[k]=left[i];
+            i++;
+            k++;
+        }
+        while(j<nR){//trasladar los elementos sobrantes de L2
+            X[k]=right[j];
+            j++;
+            k++;
+        }
+    }
     
 }
