@@ -109,8 +109,7 @@ public class Sort {
         if(Y==null) return null;
         Integer[] X=Y.clone();
         HeapSortConstruct(X);//1)fase de construccion
-        //return HeapSortExtract(X);//2) fase de extraccion        
-        return X;
+        return HeapSortExtract(X);//2) fase de extraccion                
     }
     private void HeapSortConstruct(Integer[] X){
         int current=0, maxChildIndex;
@@ -123,7 +122,7 @@ public class Sort {
                     hecho=true;//nodo actual no tiene hijos
                 else{//el nodo actual tiene por lo menos 1 hijo
                     maxChildIndex=HeapSortMaxChild(X,current,X.length - 1);
-                    if(X[current]>X[maxChildIndex]){
+                    if(X[current]< X[maxChildIndex]){
                         intercambio(X,current,maxChildIndex);
                         current=maxChildIndex;                    
                     }else
@@ -149,6 +148,31 @@ public class Sort {
         X[p]=X[q];
         X[q]=temp;
     }
+    
+    private Integer[] HeapSortExtract(Integer[] X){
+        Integer[] Y=new Integer[X.length];//va contener los elementos extraidos del heap
+        int current, maxChildIndex;
+        boolean hecho;
+        for(int i=X.length -1; i>=0; i--){
+            Y[i]=X[0];//consignamos la raiz del heap en el array destino(ordenado)
+            X[0]=X[i];//rellenando la raiz del heap con el ultimo elemento del heap
+            current=0;
+            hecho=false;
+            while(!hecho){//procedimiento para resstructurar el heap, luego de extraer elemento
+                if(2*current + 1 > i)
+                    hecho=true;
+                else{//si el nodo tiene al menos un hijo
+                    maxChildIndex=HeapSortMaxChild(X,current,i);
+                    if(X[current]< X[maxChildIndex]){
+                        intercambio(X,current,maxChildIndex);
+                        current=maxChildIndex;                    
+                    }else
+                        hecho=true;    
+                }       
+            }//end while
+        }//end for
+        return Y;
+    }   
     
     
 }
