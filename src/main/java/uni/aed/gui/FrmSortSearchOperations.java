@@ -1,13 +1,16 @@
+package uni.aed.gui;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package uni.aed.gui;
+
 
 import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import uni.aed.search.Search;
+//import uni.aed.sort.Complejidad;
 import uni.aed.sort.Sort;
 
 /**
@@ -15,9 +18,9 @@ import uni.aed.sort.Sort;
  * @author zemr
  */
 public class FrmSortSearchOperations extends javax.swing.JFrame {
-    private final DefaultListModel dlmInicial=new DefaultListModel();
-    private final DefaultListModel dlmFinal=new DefaultListModel();
-    private final String CADENA_VACIA="";
+    private final DefaultListModel dlmInicial = new DefaultListModel();    
+    private final DefaultListModel dlmFinal = new DefaultListModel();    
+    private final String CADENA_VACIA="";    
     private final int NO_ENCONTRADO=-1;
     private int result=NO_ENCONTRADO;
     
@@ -28,102 +31,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         initComponents();
         jlInicial.setModel(dlmInicial);
         jlFinal.setModel(dlmFinal);
-    }
-    
-    private void Insertar(){
-        String data=jtfData.getText();
-        if(!dlmInicial.contains(data))
-            dlmInicial.addElement(data);
-        jtfData.setText(CADENA_VACIA);
-    }
-    private void searchLineal(){
-        //validar si el componente jlist tiene data
-        int N=dlmInicial.size();
-        if(N<1)
-        { JOptionPane.showMessageDialog(this, "La lista se encuentra vacia",
-                "ERROR", JOptionPane.ERROR);            
-          return;
-        }
-        //validar que se haya consignado el elemento a buscar
-        if(jtfData.getText().isEmpty())
-        { JOptionPane.showMessageDialog(this, "Debe consignar el valor que desea buscar",
-                "ERROR", JOptionPane.ERROR);            
-          return;
-        }
-        Integer[] X=Arrays.stream(dlmInicial.toArray())
-                .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
-        Search search=new Search();
-        result=search.searchLineal(X, Integer.parseInt(jtfData.getText()));
-        jtfComplejidad.setText(search.SEARCH_LINEAL_COMPLEJIDAD_WORSTCASE);
-        jtfComparaciones.setText(Integer.toString(search.getnComp()));
-        if(result==search.NO_ENCONTRADO)
-            JOptionPane.showMessageDialog(this, "El valor buscado no se encontro en la lista",
-                "WARNING", JOptionPane.WARNING_MESSAGE);            
-        else{
-            jlInicial.setSelectedIndex(result);//Seleccion el row con el valor
-            jlInicial.requestFocusInWindow();//coloca el foco en la lista
-            jlInicial.requestFocus();
-            JOptionPane.showMessageDialog(this, "El valor buscado se encontro en la lista en el registro " 
-                    + (result + 1),"EXITO", JOptionPane.OK_OPTION);            
-        }
-    }
-    private void searchBinaria(){
-        int N=dlmFinal.size();
-        if(N<1)
-        { JOptionPane.showMessageDialog(this, "La lista se encuentra vacia",
-                "ERROR", JOptionPane.ERROR_MESSAGE);            
-          return;
-        }
-        //validar que se haya consignado el elemento a buscar
-        if(jtfData.getText().isEmpty())
-        { JOptionPane.showMessageDialog(this, "Debe consignar el valor que desea buscar",
-                "ERROR", JOptionPane.ERROR_MESSAGE);            
-          return;
-        }
-        Integer[] X=Arrays.stream(dlmFinal.toArray())
-                .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
-        Search search=new Search();
-        result=search.searchBinaria(X, Integer.parseInt(jtfData.getText()));
-        jtfComplejidad.setText(search.SEARCH_BINARY_COMPLEJIDAD_WORSTCASE);
-        jtfComparaciones.setText(Integer.toString(search.getnComp()));
-        if(result==search.NO_ENCONTRADO)
-            JOptionPane.showMessageDialog(this, "El valor buscado no se encontro en la lista",
-                "WARNING", JOptionPane.WARNING_MESSAGE);            
-        else{
-            jlFinal.setSelectedIndex(result);//Seleccion el row con el valor
-            jlFinal.requestFocusInWindow();//coloca el foco en la lista
-            jlFinal.requestFocus();
-            JOptionPane.showMessageDialog(this, "El valor buscado se encontro en la lista en el registro " 
-                    + (result + 1),"EXITO", JOptionPane.PLAIN_MESSAGE);            
-        }
-        
-    }
-    private void Sort(){
-        int N=dlmInicial.size();
-        if(N<1)
-        { JOptionPane.showMessageDialog(this, "La lista se encuentra vacia",
-                "ERROR", JOptionPane.ERROR);            
-          return;
-        }        
-        Integer[] X=Arrays.stream(dlmInicial.toArray())
-                .map(obj->Integer.valueOf(obj.toString())).toArray(Integer[]::new);
-        Sort sort=new Sort();
-        sort.setY(X);
-        switch(jcbSort.getSelectedIndex()){
-            case 0 ->{ X=sort.selectionWuSort();
-                        jtfComplejidad.setText(sort.SELECCION_COMPLEJIDAD_WORSTCASE);
-                        }
-            case 1 ->{X=sort.bubbleWuSort();
-                        jtfComplejidad.setText(sort.BURBUJA_COMPLEJIDAD_WORSTCASE);
-                     }
-            case 2 ->{X=sort.insercionBinariaSort();
-                        jtfComplejidad.setText(sort.INSERCIONBINARIA_COMPLEJIDAD_WORSTCASE);
-                        }
-        }
-        dlmFinal.removeAllElements();
-        for(Integer x:X)
-            dlmFinal.addElement(x);        
-        jtfComparaciones.setText(Integer.toString(sort.getnComp()));
+        //rbSearchLineal.setSelected(true);        
     }
 
     /**
@@ -135,29 +43,44 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        bGSearch = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jtfData = new javax.swing.JTextField();
-        jbSearch = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jrbSearchLineal = new javax.swing.JRadioButton();
         jrbSearchBinaria = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        cbCarga = new javax.swing.JComboBox<>();
+        jPanel7 = new javax.swing.JPanel();
+        jlIni = new javax.swing.JLabel();
+        jsFin = new javax.swing.JSpinner();
+        jsIni = new javax.swing.JSpinner();
+        jlFin = new javax.swing.JLabel();
+        jbGenerar = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        rbDuplicados = new javax.swing.JRadioButton();
+        rbUnicos = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlInicial = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jlFinal = new javax.swing.JList<>();
-        jcbSort = new javax.swing.JComboBox<>();
+        cbSort = new javax.swing.JComboBox<>();
         jbSort = new javax.swing.JButton();
-        jtfComparaciones = new javax.swing.JTextField();
-        jtfComplejidad = new javax.swing.JTextField();
-        jlComparaciones = new javax.swing.JLabel();
+        lblMsg = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jlComplejidad = new javax.swing.JLabel();
+        jtfNComparaciones = new javax.swing.JTextField();
+        jlNComparaciones = new javax.swing.JLabel();
+        jtfComplejidad = new javax.swing.JTextField();
+        jbLimpiarResult = new javax.swing.JButton();
+        jbLimpiarTodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Algoritmos de Busqueda y Ordenamiento");
+        setTitle("Algoritmos de Ordenamiento y Busqueda");
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(540, 134));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criterios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
 
         jtfData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,20 +88,20 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
             }
         });
 
-        jbSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-icon20.png"))); // NOI18N
-        jbSearch.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-icon20.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSearchActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search Algorithms:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search Algorithms", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 153))); // NOI18N
 
-        buttonGroup1.add(jrbSearchLineal);
+        bGSearch.add(jrbSearchLineal);
         jrbSearchLineal.setSelected(true);
         jrbSearchLineal.setText("Lineal");
 
-        buttonGroup1.add(jrbSearchBinaria);
+        bGSearch.add(jrbSearchBinaria);
         jrbSearchBinaria.setText("Binaria");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -187,19 +110,100 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jrbSearchBinaria)
-                    .addComponent(jrbSearchLineal))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jrbSearchBinaria, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jrbSearchLineal, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jrbSearchLineal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jrbSearchBinaria)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jLabel1.setText("Tipo de Carga:");
+
+        cbCarga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manual", "Aleatorio" }));
+
+        jlIni.setText("Ini:");
+
+        jlFin.setText("Fin:");
+
+        jbGenerar.setText("Generar");
+        jbGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGenerarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlIni, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jsIni, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlFin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jsFin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jbGenerar)
+                .addGap(15, 15, 15))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jsIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jsFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlIni)
+                    .addComponent(jlFin)
+                    .addComponent(jbGenerar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        rbDuplicados.setText("Permite Duplicados");
+        rbDuplicados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDuplicadosActionPerformed(evt);
+            }
+        });
+
+        rbUnicos.setSelected(true);
+        rbUnicos.setText("Valores Unicos");
+        rbUnicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbUnicosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbUnicos)
+                .addGap(18, 18, 18)
+                .addComponent(rbDuplicados, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbUnicos)
+                    .addComponent(rbDuplicados))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -207,37 +211,56 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSearch))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jtfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
-        jlInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Registrados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
+        jPanel2.setPreferredSize(new java.awt.Dimension(578, 353));
+
+        jlInicial.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Registrados"));
         jScrollPane1.setViewportView(jlInicial);
 
-        jlFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Ordenados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
+        jlFinal.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Ordenados"));
         jScrollPane2.setViewportView(jlFinal);
 
-        jcbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", "Burbuja", "Insercion Binaria" }));
+        cbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", "Burbuja", "Insercion", "Insercion Binaria", "Burbuja1" }));
 
         jbSort.setText("Sort");
         jbSort.addActionListener(new java.awt.event.ActionListener() {
@@ -246,121 +269,314 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
             }
         });
 
-        jtfComparaciones.setEditable(false);
-        jtfComparaciones.setBackground(new java.awt.Color(204, 204, 204));
-
-        jtfComplejidad.setEditable(false);
-        jtfComplejidad.setBackground(new java.awt.Color(204, 204, 204));
-        jtfComplejidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfComplejidadActionPerformed(evt);
-            }
-        });
-
-        jlComparaciones.setText("#Comparaciones");
-
-        jlComplejidad.setText("Complejidad Asintótica:");
+        lblMsg.setText("Se generaron ...");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jcbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addComponent(cbSort, 0, 259, Short.MAX_VALUE)
+                                .addGap(18, 18, 18))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(jbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlComparaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfComparaciones)
-                            .addComponent(jtfComplejidad))
-                        .addGap(12, 12, 12)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jbSort)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jcbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfComparaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlComparaciones))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbSort)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMsg)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Analisis de Complejidad:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 102))); // NOI18N
+        jPanel4.setForeground(new java.awt.Color(0, 0, 153));
+
+        jlComplejidad.setText("Complejidad Asintótica:");
+
+        jtfNComparaciones.setEditable(false);
+
+        jlNComparaciones.setText("#Comparaciones:");
+        jlNComparaciones.setPreferredSize(new java.awt.Dimension(127, 16));
+
+        jtfComplejidad.setEditable(false);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlNComparaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfNComparaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(jtfComplejidad))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNComparaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlNComparaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlComplejidad))
+                .addContainerGap())
+        );
+
+        jbLimpiarResult.setText("Limpiar Resultado");
+        jbLimpiarResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarResultActionPerformed(evt);
+            }
+        });
+
+        jbLimpiarTodo.setText("Limpiar Todo");
+        jbLimpiarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarTodoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jbLimpiarResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbLimpiarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                        .addGap(48, 48, 48))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbLimpiarResult)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbLimpiarTodo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        if (jrbSearchLineal.isSelected())    
+            searchLineal();
+        if (jrbSearchBinaria.isSelected())    
+            searchBinaria();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
     private void jtfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDataActionPerformed
         // TODO add your handling code here:
         Insertar();
     }//GEN-LAST:event_jtfDataActionPerformed
 
-    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
-        // TODO add your handling code here:
-        if(jrbSearchLineal.isSelected())
-            searchLineal();
-        if(jrbSearchBinaria.isSelected())
-            searchBinaria();
-    }//GEN-LAST:event_jbSearchActionPerformed
-
     private void jbSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSortActionPerformed
         // TODO add your handling code here:
-        Sort();
+        Sort();    
     }//GEN-LAST:event_jbSortActionPerformed
 
-    private void jtfComplejidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfComplejidadActionPerformed
+    private void jbLimpiarResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarResultActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfComplejidadActionPerformed
+        ClearResult();
+    }//GEN-LAST:event_jbLimpiarResultActionPerformed
 
+    private void jbLimpiarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTodoActionPerformed
+        // TODO add your handling code here:
+        ClearAll();
+    }//GEN-LAST:event_jbLimpiarTodoActionPerformed
+
+    private void jbGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGenerarActionPerformed
+        // TODO add your handling code here:
+        switch(cbCarga.getSelectedIndex()){
+            case 1->{//aleatorio
+                if (jtfData.getText().length()==0) return;
+                Integer N=Integer.valueOf(jtfData.getText());
+                if (N<=1) return;
+                Object valueIni=jsIni.getValue();
+                Object valueFin=jsFin.getValue();
+                if (("0".equals(valueIni.toString()) )|| ("0".equals(valueFin.toString()) )) return;
+                if (Integer.parseInt(valueFin.toString())<=(Integer.valueOf(valueIni.toString()) + N)) return;
+                for(int i=0;i<N;i++){
+                    int valor=random(Integer.parseInt(valueIni.toString()),Integer.parseInt(valueFin.toString()));
+                    if (rbUnicos.isSelected())
+                        if (!dlmInicial.contains(valor))
+                            dlmInicial.addElement(valor);
+                    if (rbDuplicados.isSelected())
+                        dlmInicial.addElement(valor);
+                }
+                lblMsg.setText("Se Generaron " +dlmInicial.size()+" valores");
+            }
+        }
+    }//GEN-LAST:event_jbGenerarActionPerformed
+
+    private void rbDuplicadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDuplicadosActionPerformed
+        // TODO add your handling code here:
+        ClearAll();
+        rbUnicos.setSelected(false);
+    }//GEN-LAST:event_rbDuplicadosActionPerformed
+
+    private void rbUnicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbUnicosActionPerformed
+        // TODO add your handling code here:
+        ClearAll();
+        rbDuplicados.setSelected(false);
+    }//GEN-LAST:event_rbUnicosActionPerformed
+    private static int random(int low,int high){
+        return (int) Math.floor(Math.random()*(high-low+1)) + low;
+    }
+    private void Insertar(){        
+        String data=jtfData.getText();
+        if (!dlmInicial.contains(data))
+            dlmInicial.addElement(data);
+        jtfData.setText("");        
+    }
+    private void searchLineal(){        
+        int N=dlmInicial.size();
+        if (N<1) 
+        {    JOptionPane.showMessageDialog(this, "La lista se encuentra vacia",
+                                   "ERROR", JOptionPane.WARNING_MESSAGE); 
+            return;               
+        }
+        if (jtfData.getText().isEmpty()) 
+        {   JOptionPane.showMessageDialog(this, "Debe consignar el valor que desea buscar",
+                                   "ERROR", JOptionPane.WARNING_MESSAGE); 
+            return;               
+        }
+        Integer[] X = Arrays.stream(dlmInicial.toArray())
+              .map(obj -> Integer.valueOf(obj.toString()) ).toArray(Integer[]::new); 
+        Search s=new Search();             
+        result=s.searchLineal(X, Integer.parseInt(jtfData.getText()));
+        jtfComplejidad.setText(s.SEARCH_LINEAL_COMPLEJIDAD_WORSTCASE);
+        jtfNComparaciones.setText(Integer.toString(s.getnComp())); 
+        if (result==s.NO_ENCONTRADO) 
+            JOptionPane.showMessageDialog(this, "El valor buscado no se encontro en la lista",
+                                   "RESULTADO", JOptionPane.WARNING_MESSAGE);                
+        else{            
+            jlInicial.setSelectedIndex(result); // Selecciona el row con el valor                
+            jlInicial.requestFocusInWindow(); // Coloca el foco en la lista
+            jlInicial.requestFocus(); // Enfoca la lista
+            JOptionPane.showMessageDialog(this, "El valor se encontro en la lista en el registro: " + (result + 1),
+                                   "RESULTADO", JOptionPane.WARNING_MESSAGE);                
+        }
+        
+    }
+    private void searchBinaria(){
+        int N=dlmFinal.size();
+        if (N<1) 
+        {    JOptionPane.showMessageDialog(this, "La lista se encuentra vacia",
+                                   "ERROR", JOptionPane.WARNING_MESSAGE); 
+            return;               
+        }
+        if (jtfData.getText().isEmpty()) 
+        {   JOptionPane.showMessageDialog(this, "Debe consignar el valor que desea buscar",
+                                   "ERROR", JOptionPane.WARNING_MESSAGE); 
+            return;               
+        }
+        Integer[] X = Arrays.stream(dlmFinal.toArray())
+              .map(obj -> Integer.valueOf(obj.toString()) ).toArray(Integer[]::new); 
+        Search s=new Search();             
+        result=s.searchBinaria(X, Integer.parseInt(jtfData.getText()));
+        jtfComplejidad.setText(s.SEARCH_BINARY_COMPLEJIDAD_WORSTCASE);
+        jtfNComparaciones.setText(Integer.toString(s.getnComp())); 
+        if (result==s.NO_ENCONTRADO) 
+            JOptionPane.showMessageDialog(this, "El valor buscado no se encontro en la lista",
+                                   "RESULTADO", JOptionPane.WARNING_MESSAGE);                
+        else{            
+            jlFinal.setSelectedIndex(result); // Selecciona el row con el valor                
+            jlFinal.requestFocusInWindow(); // Coloca el foco en la lista
+            jlFinal.requestFocus(); // Enfoca la lista
+            JOptionPane.showMessageDialog(this, "El valor se encontro en la lista en el registro: " + (result + 1),
+                                   "RESULTADO", JOptionPane.WARNING_MESSAGE);                
+        }
+    }
+    private void Sort(){
+        int N=dlmInicial.size();
+        if (N<=1) return;                
+        Integer[] X = Arrays.stream(dlmInicial.toArray())
+              .map(obj -> Integer.valueOf(obj.toString()) ).toArray(Integer[]::new);        
+        Sort sort=new Sort();                 
+        sort.setY(X);
+        switch(cbSort.getSelectedIndex()){           
+            case 0 ->{ X=sort.selectionWuSort();
+                        jtfComplejidad.setText(sort.SELECCION_COMPLEJIDAD_WORSTCASE);
+                        }
+            case 1 ->{X=sort.bubbleWuSort();
+                        jtfComplejidad.setText(sort.BURBUJA_COMPLEJIDAD_WORSTCASE);
+                     }
+            case 2 ->{X=sort.insercionBinariaSort();
+                        jtfComplejidad.setText(sort.INSERCIONBINARIA_COMPLEJIDAD_WORSTCASE);
+                        }
+            
+        }//end switch   
+        jtfNComparaciones.setText(Integer.toString(sort.getnComp()));        
+        dlmFinal.removeAllElements();        
+        for(Integer x: X)
+            dlmFinal.addElement(x);
+    }
+    private void ClearResult(){        
+        dlmFinal.removeAllElements();        
+        jtfNComparaciones.setText(CADENA_VACIA);                
+        jtfComplejidad.setText(CADENA_VACIA);        
+    }
+    
+    private void ClearAll(){        
+        dlmInicial.removeAllElements();    
+        jtfData.setText(CADENA_VACIA);
+        lblMsg.setText(CADENA_VACIA);
+        ClearResult();
+    }
     /**
      * @param args the command line arguments
      */
@@ -387,6 +603,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmSortSearchOperations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -397,23 +614,38 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup bGSearch;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox<String> cbCarga;
+    private javax.swing.JComboBox<String> cbSort;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton jbSearch;
+    private javax.swing.JButton jbGenerar;
+    private javax.swing.JButton jbLimpiarResult;
+    private javax.swing.JButton jbLimpiarTodo;
     private javax.swing.JButton jbSort;
-    private javax.swing.JComboBox<String> jcbSort;
-    private javax.swing.JLabel jlComparaciones;
     private javax.swing.JLabel jlComplejidad;
+    private javax.swing.JLabel jlFin;
     private javax.swing.JList<String> jlFinal;
+    private javax.swing.JLabel jlIni;
     private javax.swing.JList<String> jlInicial;
+    private javax.swing.JLabel jlNComparaciones;
     private javax.swing.JRadioButton jrbSearchBinaria;
     private javax.swing.JRadioButton jrbSearchLineal;
-    private javax.swing.JTextField jtfComparaciones;
+    private javax.swing.JSpinner jsFin;
+    private javax.swing.JSpinner jsIni;
     private javax.swing.JTextField jtfComplejidad;
     private javax.swing.JTextField jtfData;
+    private javax.swing.JTextField jtfNComparaciones;
+    private javax.swing.JLabel lblMsg;
+    private javax.swing.JRadioButton rbDuplicados;
+    private javax.swing.JRadioButton rbUnicos;
     // End of variables declaration//GEN-END:variables
 }

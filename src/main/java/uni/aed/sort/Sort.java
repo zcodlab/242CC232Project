@@ -105,5 +105,50 @@ public class Sort {
         this.setnComp(nComp);
         return X;
     }
+    public Integer[] heapSort(){
+        if(Y==null) return null;
+        Integer[] X=Y.clone();
+        HeapSortConstruct(X);//1)fase de construccion
+        //return HeapSortExtract(X);//2) fase de extraccion        
+        return X;
+    }
+    private void HeapSortConstruct(Integer[] X){
+        int current=0, maxChildIndex;
+        boolean hecho;
+        for(int i=(X.length-2)/2; i>=0; i--){
+            current=i;
+            hecho=false;
+            while(!hecho){
+                if(2*current+1 > X.length-1)
+                    hecho=true;//nodo actual no tiene hijos
+                else{//el nodo actual tiene por lo menos 1 hijo
+                    maxChildIndex=HeapSortMaxChild(X,current,X.length - 1);
+                    if(X[current]>X[maxChildIndex]){
+                        intercambio(X,current,maxChildIndex);
+                        current=maxChildIndex;                    
+                    }else
+                        hecho=true;                    
+                }                    
+            }
+        }
+    }
+    
+    private int HeapSortMaxChild(Integer[] X,int loc,int end){
+        int result, izq,der;
+        izq=2*loc+1;//posicionamiento impar = nodo izq
+        der=2*loc+2;//posicionamiento par = nodo der
+        if(der<=end && X[izq]<X[der])
+            result=der;
+        else
+            result=izq;
+        return result;        
+    }
+    
+    private void intercambio(Integer[] X,int p,int q){
+        int temp=X[p];
+        X[p]=X[q];
+        X[q]=temp;
+    }
+    
     
 }
