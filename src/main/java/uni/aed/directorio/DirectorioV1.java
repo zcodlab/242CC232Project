@@ -38,7 +38,26 @@ public class DirectorioV1 implements Directorio{
 
     @Override
     public boolean delete(String searchName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean status;
+        int loc;
+        loc=findIndex(searchName);
+        if(loc==NOT_FOUND)
+            status=false;
+        else{
+            entry[loc]=entry[count-1];
+            status=true;
+            count--;
+        }
+        return status;
+    }
+    private int findIndex(String searchName){
+        int loc=0;
+        while(loc<count && !searchName.equals(entry[loc].getName())){
+            loc++;
+        }
+        if(loc==count)
+            loc=NOT_FOUND;
+        return loc;
     }
 
     @Override
@@ -58,7 +77,10 @@ public class DirectorioV1 implements Directorio{
 
     @Override
     public String toString() {
-        return "DirectorioV1{" + "entry=" + entry + '}';
+        StringBuilder str=new StringBuilder();
+        for(Persona p:entry)
+            str.append(p.toString());
+        return str.toString();
     }
     
 }
