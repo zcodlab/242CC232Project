@@ -1,6 +1,7 @@
 package uni.aed.directorio;
 
 import uni.aed.model.Persona;
+import uni.aed.search.SearchObject;
 
 public class DirectorioV1 implements Directorio{
     private static final int DEFAULT_SIZE=25;
@@ -67,7 +68,20 @@ public class DirectorioV1 implements Directorio{
 
     @Override
     public int search(Object searchValue, String algoritmo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Object[] searchList=new Persona[count];
+        int result=NOT_FOUND;
+        for(int i=0;i<count;i++)
+            searchList[i]=entry[i];
+        SearchObject searchObject=new SearchObject();
+        switch(algoritmo.toUpperCase()){
+            case "LINEAL"->{
+                result=searchObject.Lineal(searchList, searchValue);
+            }
+            case "BINARIA"->{
+                result=searchObject.Binaria(searchList, searchValue);
+            }
+        }
+        return result;
     }
 
     @Override

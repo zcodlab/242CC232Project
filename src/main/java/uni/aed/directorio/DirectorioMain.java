@@ -28,6 +28,12 @@ public class DirectorioMain {
         
         System.out.println("Coleccion de Persona despues de la eliminacion");
         System.out.println(directorio.toString());
+        
+        System.out.println("Realizando la busqueda");
+        System.out.println(directorio.search(p3,"LINEAL"));
+        
+        System.out.println("Realizando la busqueda");
+        System.out.println(directorio.search(p4,"LINEAL"));
     }
     
     private int random(int low,int high){
