@@ -37,9 +37,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jbLimpiarResult" max="32767" attributes="0"/>
-                      <Component id="jbLimpiarTodo" min="-2" pref="156" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jbCerrar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jbLimpiarResult" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jbLimpiarTodo" alignment="0" pref="156" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -64,6 +65,8 @@
                       <Component id="jbLimpiarResult" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbLimpiarTodo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jbCerrar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -459,12 +462,10 @@
         <Component class="javax.swing.JComboBox" name="cbSort">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="3">
                 <StringItem index="0" value="Seleccion"/>
                 <StringItem index="1" value="Burbuja"/>
-                <StringItem index="2" value="Insercion"/>
-                <StringItem index="3" value="Insercion Binaria"/>
-                <StringItem index="4" value="Burbuja1"/>
+                <StringItem index="2" value="Insercion Binaria"/>
               </StringArray>
             </Property>
           </Properties>
@@ -578,6 +579,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarTodoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbCerrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cerrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCerrarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

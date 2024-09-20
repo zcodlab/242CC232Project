@@ -33,7 +33,7 @@ public class Search {
     }
     
     public int searchBinaria(Integer[] X,int valor){
-        int bajo=0, alto=X.length, medio=(bajo+alto)/2;
+        int bajo=0, alto=X.length - 1, medio=(bajo+alto)/2;
         int ncomp=0;
         while(bajo<=alto && X[medio]!=valor){
             ncomp++;

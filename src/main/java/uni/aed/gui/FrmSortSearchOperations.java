@@ -76,6 +76,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         jtfComplejidad = new javax.swing.JTextField();
         jbLimpiarResult = new javax.swing.JButton();
         jbLimpiarTodo = new javax.swing.JButton();
+        jbCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Algoritmos de Ordenamiento y Busqueda");
@@ -260,7 +261,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         jlFinal.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Ordenados"));
         jScrollPane2.setViewportView(jlFinal);
 
-        cbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", "Burbuja", "Insercion", "Insercion Binaria", "Burbuja1" }));
+        cbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion", "Burbuja", "Insercion Binaria" }));
 
         jbSort.setText("Sort");
         jbSort.addActionListener(new java.awt.event.ActionListener() {
@@ -369,6 +370,13 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
             }
         });
 
+        jbCerrar.setText("Cerrar");
+        jbCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -381,9 +389,10 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jbLimpiarResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbLimpiarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jbCerrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbLimpiarResult, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbLimpiarTodo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -403,6 +412,8 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
                         .addComponent(jbLimpiarResult)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbLimpiarTodo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbCerrar)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -473,6 +484,11 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
         ClearAll();
         rbDuplicados.setSelected(false);
     }//GEN-LAST:event_rbUnicosActionPerformed
+
+    private void jbCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jbCerrarActionPerformed
     private static int random(int low,int high){
         return (int) Math.floor(Math.random()*(high-low+1)) + low;
     }
@@ -627,6 +643,7 @@ public class FrmSortSearchOperations extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbCerrar;
     private javax.swing.JButton jbGenerar;
     private javax.swing.JButton jbLimpiarResult;
     private javax.swing.JButton jbLimpiarTodo;
