@@ -53,6 +53,9 @@ public class SimpleLinkedListMain {
         System.out.println("Visualizando el contenido de la lista");
         System.out.println(lista.toString());
         
+        System.out.println("Visualizando la lista de forma inversa");
+        System.out.println(lista.displayReverse());
+        
     }
     
 }

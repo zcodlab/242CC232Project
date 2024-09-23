@@ -107,5 +107,19 @@ public class SimpleLinkedList {
         return str.toString();
     }
     
+    public String displayReverse(){
+        StringBuilder str=new StringBuilder();
+        Nodo temp=head;
+        if(isEmpty()==false)
+            reverse(temp,str);
+        return str.toString();
+    }
+    private void reverse(Nodo temp, StringBuilder str){
+        if(temp.getNext()!=null)
+            reverse(temp.getNext(),str);
+        str.append(temp.getData());
+        str.append("->");        
+    }
+    
     
 }
