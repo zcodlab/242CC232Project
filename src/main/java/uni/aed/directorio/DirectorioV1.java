@@ -2,6 +2,7 @@ package uni.aed.directorio;
 
 import uni.aed.model.Persona;
 import uni.aed.search.SearchObject;
+import uni.aed.sort.SortObject;
 
 public class DirectorioV1 implements Directorio{
     private static final int DEFAULT_SIZE=25;
@@ -95,6 +96,28 @@ public class DirectorioV1 implements Directorio{
         for(Persona p:entry)
             str.append(p.toString());
         return str.toString();
+    }
+    
+    //implementacion del metodo sort que atiende el enunciado 1 de la 1PC
+    @Override     
+    public Object[] sort ( int attribute,String algoritmo ) {
+        if (!(attribute == Persona.NAME || attribute == Persona.AGE) ) {
+            throw new IllegalArgumentException( );
+        }  
+        Object[] result=null;
+        Persona[] sortedList = new Persona[ count ];        
+        //copiamos las referencias a la lista ordenada
+        entry[0].setCompareAttribute(attribute);
+        for (int i = 0; i < count; i++)
+            sortedList[i] = entry[i];
+        switch(algoritmo.toUpperCase()){                        
+            case "MERGESORT"->{
+                SortObject sortObject=new SortObject();                 
+                sortObject.setY((Object[])sortedList);
+                result=sortObject.MergeSort();
+            }
+        }//end switch
+        return result;
     }
     
 }
