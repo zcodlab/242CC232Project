@@ -87,5 +87,22 @@ public class OSimpleLinkedList {
         }
         return str.toString();
     }
-    
+    //Resuelve Cap16-Ej7
+    public String searchDuplicados(Object data){
+        ONodo temp=head;
+        StringBuilder str=new StringBuilder();
+        int index=0;
+        while (temp!=null){//mientras haya nodos en la lista
+            if(((Comparable)temp.getData()).compareTo(data)==0){
+                if(!str.isEmpty())
+                    str.append(",");
+                str.append(index);
+            }            
+            temp=temp.getNext();
+            index++;            
+        }
+        if(str.isEmpty())
+            str.append(NOT_FOUND);  //indicar de que no se ubico propietario con ese nombre      
+        return str.toString();//retorna la lista de posiciones         
+    }
 }

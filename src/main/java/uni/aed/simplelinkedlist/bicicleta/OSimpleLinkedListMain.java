@@ -18,11 +18,19 @@ public class OSimpleLinkedListMain {
         Bicicleta b2=new Bicicleta("Barack Obama");
         Bicicleta b3=new Bicicleta("Kamala Harris");
         Bicicleta b4=new Bicicleta("Dina Boluarte");
+        Bicicleta b5=new Bicicleta("Steve Jobs");
+        Bicicleta b6=new Bicicleta("Barack Obama");
+        Bicicleta b7=new Bicicleta("Bill Gates");
+        Bicicleta b8=new Bicicleta("Barack Obama");
         
         olista.addLast(b1);
         olista.addLast(b2);
         olista.addLast(b3);
         olista.addLast(b4);
+        olista.addLast(b5);
+        olista.addLast(b6);
+        olista.addLast(b7);
+        olista.addLast(b8);
         
         System.out.println("Visualizando el contenido de la lista de Bicicletas:"+ olista.size());
         System.out.println(olista.toString());
@@ -40,5 +48,10 @@ public class OSimpleLinkedListMain {
         nombre=scr.next();
         b=new Bicicleta(nombre);        
         System.out.println("El nombre del propietario de la bicicleta se ubico en la posicion:" + olista.search(b));        
+        
+        System.out.println("Consigne el nombre del propietario de la bicicleta a buscar");
+        nombre=scr.next();
+        b=new Bicicleta(nombre);        
+        System.out.println("El nombre del propietario de la bicicleta se ubico en la posicion:" + olista.searchDuplicados(b));        
     }
 }
