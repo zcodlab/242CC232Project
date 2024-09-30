@@ -86,6 +86,7 @@ public class SimpleLinkedList {
     }    
     public void clear(){
         head=null;
+        lenght=0;
     }
     public boolean isEmpty(){
         return(lenght==0);
