@@ -79,4 +79,38 @@ public class CircleLinkedList {
         return "->"+str.toString()+"->";
     }
     
+    //2PC: Metodos añadidos
+    public Nodo getNodo(int pos) {
+        Nodo current=head;
+        for(int i=0;i<pos;i++)
+            current=current.getNext();
+        return current;
+    }        
+    //2PC:Método remover para resolver el problema de Josephus
+    public int remover(int n){
+        if (head == null || n <= 0) {
+            return -1; // Manejo de errores
+        }
+        head = remover(head, n);        
+        return head.getData(); // Nodo sobreviviente
+    }
+    // Método recursivo para resolver el problema de Josephus
+    private Nodo remover(Nodo head, int n) {
+        if (head == null || head.getNext() == head) {
+            return head; // Solo queda un nodo
+        }
+        Nodo current = head;
+        Nodo prev = null;
+        // Contamos hasta n
+        for (int count = 1; count < n; count++) {
+            prev = current;
+            current = current.getNext();
+        }
+        // Eliminar el nodo actual
+        prev.setNext(current.getNext()); // Saltamos el nodo a eliminar
+        lenght--;
+        // Llamada recursiva
+        return remover(prev.getNext(), n);
+    }
+    
 }

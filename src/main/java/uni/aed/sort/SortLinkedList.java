@@ -1,7 +1,9 @@
 package uni.aed.sort;
 
+import uni.aed.circlelinkedlist.CircleLinkedList;
 import uni.aed.doublelinkedlist.DoubleLinkedList;
 import uni.aed.doublelinkedlist.DNodo;
+import uni.aed.simplelinkedlist.Nodo;
 
 public class SortLinkedList {
     public static void heapsort(DoubleLinkedList lista){
@@ -40,6 +42,50 @@ public class SortLinkedList {
         int temp=nodoI.getData();
         nodoI.setData(nodoJ.getData());
         nodoJ.setData(temp);
+    }
+    
+    //2PC: Metodo MergeSort con lista circular
+    public static void mergeSort(CircleLinkedList lista){
+        int n=lista.size();
+        if(n<2) return; //n=1 -> ya llego al caso base
+        int mid=n/2;
+        CircleLinkedList left= new CircleLinkedList();
+        CircleLinkedList right=new CircleLinkedList();
+        Nodo current=lista.getNodo(0);
+        for(int i=0;i<mid;i++)
+            left.addLast(lista.getNodo(i).getData());
+        for(int i=0;i<n;i++){
+            if(i>=mid)
+                right.addLast(lista.getNodo(i).getData());
+        }
+        mergeSort(left);
+        mergeSort(right);
+        merge(lista,left,right);     
+    }
+    private static void merge(CircleLinkedList lista,CircleLinkedList left,CircleLinkedList right){
+        int nL=left.size();
+        int nR=right.size();
+        int i=0,j=0,k=0;
+        while(i <nL && j<nR){
+            if(left.getNodo(i).getData()<=right.getNodo(j).getData()){
+                lista.getNodo(k).setData(left.getNodo(i).getData());
+                i++;
+            }else{
+                lista.getNodo(k).setData(right.getNodo(j).getData());
+                j++;
+            }
+            k++;
+        }
+        while(i<nL){//trasladar los elementos sobrantes de L1
+            lista.getNodo(k).setData(left.getNodo(i).getData());
+            i++;
+            k++;
+        }
+        while(j<nR){//trasladar los elementos sobrantes de L2
+            lista.getNodo(k).setData(right.getNodo(j).getData());
+            j++;
+            k++;
+        }
     }
     
 }
