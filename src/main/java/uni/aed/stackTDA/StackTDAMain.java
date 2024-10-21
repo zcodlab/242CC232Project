@@ -4,7 +4,8 @@ public class StackTDAMain {
 
     public static void main(String[] args){
         StackTDAMain stackMain=new StackTDAMain();  
-        stackMain.testLinkedStackTDA();
+        //stackMain.testLinkedStackTDA();
+        stackMain.testArrayStackTDA();
         
     }
     private void testLinkedStackTDA(){
@@ -30,5 +31,17 @@ public class StackTDAMain {
         System.out.println("Size = "+linkedStackTDA.size());
         System.out.println(linkedStackTDA.toString());
     }    
+     private void testArrayStackTDA(){
+        StackTDA<String> arrayStackTDA = new ArrayStackTDA<>(3);
+        System.out.println("Antes de añadir elementos:");	
+        System.out.println("Size = "+arrayStackTDA.size());
+        arrayStackTDA.push("Jose");
+        arrayStackTDA.push("Beatriz");
+        arrayStackTDA.push("Sandro");        
+        System.out.println("Despues de añadir elementos:");	
+        System.out.println("Size = "+arrayStackTDA.size());
+        System.out.println("Visualizando el contenido de la lista");
+        System.out.println(arrayStackTDA.toString());        
+     }
 }
 
