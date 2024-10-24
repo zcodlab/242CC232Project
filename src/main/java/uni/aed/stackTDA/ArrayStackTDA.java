@@ -32,12 +32,19 @@ public class ArrayStackTDA<E> implements StackTDA<E>{
 
     @Override
     public E pop() throws StackEmptyExceptionTDA {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(isEmpty())
+            throw new StackEmptyExceptionTDA();        
+        count--;
+        E elemento = elementos[count];
+        elementos[count]=null;
+        return elemento;
     }
-
     @Override
     public E peek() throws StackEmptyExceptionTDA {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(isEmpty())
+            throw new StackEmptyExceptionTDA();        
+        return (E)elementos[count-1];
+                                    
     }
 
     @Override

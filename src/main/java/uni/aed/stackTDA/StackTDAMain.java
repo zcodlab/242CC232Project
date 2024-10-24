@@ -41,7 +41,18 @@ public class StackTDAMain {
         System.out.println("Despues de añadir elementos:");	
         System.out.println("Size = "+arrayStackTDA.size());
         System.out.println("Visualizando el contenido de la lista");
-        System.out.println(arrayStackTDA.toString());        
+        System.out.println(arrayStackTDA.toString());  
+        
+        System.out.println("Eliminando elementos:");	        
+        System.out.println("Elemento eliminado:"+arrayStackTDA.pop());	
+        System.out.println("Despues de eliminar elemento:");	
+        System.out.println("Size = "+arrayStackTDA.size());
+        System.out.println(arrayStackTDA.toString());
+        
+        System.out.println("Recuperando el elemento con peek:");	        
+        System.out.println("Elemento recuperado es:"+arrayStackTDA.peek());	
+        System.out.println("Size = "+arrayStackTDA.size());
+        System.out.println(arrayStackTDA.toString());
      }
 }
 
