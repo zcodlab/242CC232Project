@@ -17,6 +17,11 @@ public class Persona implements Comparable{
     public Persona() {
         this("No Ingresado",0,'U');
     }
+
+    public Persona(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
     
     public Persona(String name, int age, char gender) {
         this.name = name;
