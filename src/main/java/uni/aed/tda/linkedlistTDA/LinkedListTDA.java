@@ -81,7 +81,7 @@ public class LinkedListTDA<E> implements ListTDA<E> {
         revisaPosAcceso(index);
         E data=null;
         Nodo apt=head;
-        for(int i=0;i<(index - 1);i++)
+        for(int i=0;i<index;i++)
             apt=apt.getNext();
         data=(E)apt.getData();
         return data;
@@ -171,7 +171,14 @@ public class LinkedListTDA<E> implements ListTDA<E> {
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        IteratorTDA it=new Iterador(head);
+        Object[] newArray= new Object[size()];
+        
+        int i=0;
+        while(it.hasNext())
+            newArray[i++]= (Object)it.next();
+        
+        return newArray;
     }
 
     @Override
@@ -181,6 +188,18 @@ public class LinkedListTDA<E> implements ListTDA<E> {
         while(it.hasNext()){
             if(!str.isEmpty())
                 str.append("->");
+            str.append(it.next().toString());                        
+        }
+        return str.toString();
+    }
+    
+    @Override
+    public String toString(String patron) {
+        StringBuilder str=new StringBuilder();
+        IteratorTDA<E> it=new Iterador<>(head);
+        while(it.hasNext()){
+            if(!str.isEmpty())
+                str.append(patron);
             str.append(it.next().toString());                        
         }
         return str.toString();

@@ -121,10 +121,7 @@ public class ArrayListTDA<E> implements ListTDA<E> {
         data=temp;
     }
 
-    @Override
-    public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
     public Iterador<E> iterador(){
         return new Iterador<>(this);
@@ -141,5 +138,15 @@ public class ArrayListTDA<E> implements ListTDA<E> {
         }
         return str.toString();
     }
-    
+
+    @Override
+    public Object[] toArray() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String toString(String patron) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+   
 }

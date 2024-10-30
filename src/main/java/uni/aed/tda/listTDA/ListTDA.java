@@ -13,4 +13,5 @@ public interface ListTDA<E> {
     public E modify(int index,E elemento) throws IndexOutOfBoundsException;
     public int size();
     public Object[] toArray();
+    public String toString(String patron);
 }
