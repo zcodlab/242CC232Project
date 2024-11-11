@@ -18,5 +18,20 @@ public class BSTMain {
         System.out.println("Realizando una llamada inorder:LVR");
         tree.inorder(str);
         System.out.println(str.toString());
+        
+        System.out.println("Realizando una llamada preorder:VLR");
+        str.setLength(0);
+        tree.preorder(str);
+        System.out.println(str.toString());
+        
+        System.out.println("Realizando una llamada postorder:LRV");
+        str.setLength(0);
+        tree.postorder(str);
+        System.out.println(str.toString());
+        
+        System.out.println("Realizando recorrido primero en amplitud");
+        str.setLength(0);
+        tree.breadthFirst(str);
+        System.out.println(str.toString());
     }
 }
