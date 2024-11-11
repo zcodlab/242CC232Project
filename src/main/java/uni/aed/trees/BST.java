@@ -87,6 +87,99 @@ public class BST {
                     queue.enqueue(p.getRight());
             }
         }
+    }    
+    public BSTNode search(int data){
+        return search(root,data);
+    }
+    private BSTNode search(BSTNode p,int data){
+        while(p!=null){
+            if(p.getKey()==data)
+                return p;
+            else if(data<p.getKey())
+                p=p.getLeft();
+            else
+                p=p.getRight();
+        }
+        return null;
+    }
+    
+    public int deleteByCopying(int data){
+        BSTNode tmp,node,p=root,prev=null,previous;
+        //buscar el nodo a eliminar
+        while(p!=null && p.getKey()!=data){
+            prev=p;
+            if(p.getKey()<data)
+                p=p.getRight();
+            else
+                p=p.getLeft();                
+        }
+        node=p;
+        if(p!=null && p.getKey()==data){//encontro el elemento a buscar
+            if(node.getRight()==null)//no tiene hijo derecho
+                node=node.getLeft();
+            else if(node.getLeft()==null)//no tiene hijo izq
+                node=node.getRight();
+            else{//tiene 2 hijos
+                tmp=node.getLeft();
+                previous=node;
+                while(tmp.getRight()!=null){//buscando el nodo del extremo derecho de la rama izq
+                    previous=tmp;
+                    tmp=tmp.getRight();
+                }
+                node.setKey(tmp.getKey());
+                if(previous==node)
+                    previous.setLeft(tmp.getLeft());
+                else
+                    previous.setRight(tmp.getLeft());
+            }
+            if(p==root)
+                root=node;
+            else if(prev.getLeft()==p)
+                prev.setLeft(node);
+            else
+                prev.setRight(node);
+        }
+        else if(root!=null)
+            return NOT_FOUND;//no encontro el elemento a eliminar
+        else
+            return IS_EMPTY;//arbol vacio
+        return FOUND;
+    }
+    
+    public int deleteByMerging(int data){
+        BSTNode tmp,node,p=root,prev=null;
+        //buscar el nodo a eliminar
+        while(p!=null && p.getKey()!=data){
+            prev=p;
+            if(p.getKey()<data)
+                p=p.getRight();
+            else
+                p=p.getLeft();                
+        }
+        node=p;
+        if(p!=null && p.getKey()==data){
+            if(node.getRight()==null)
+                node=node.getLeft();
+            else if(node.getLeft()==null)
+                node=node.getRight();
+            else{
+                tmp=node.getLeft();
+                while(tmp.getRight()!=null)
+                    tmp=tmp.getRight();
+                tmp.setRight(node.getRight());
+                node=node.getLeft();                
+            }
+            if(p==root)
+                root=node;
+            else if(prev.getLeft()==p)
+                prev.setLeft(node);
+            else
+                prev.setRight(node);
+        }else if(root!=null)
+            return NOT_FOUND;
+        else
+            return IS_EMPTY;
+        return FOUND;
     }
     
 }
