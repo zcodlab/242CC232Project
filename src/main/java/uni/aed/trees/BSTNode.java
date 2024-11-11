@@ -24,6 +24,23 @@ public class BSTNode {
     public int getKey() {
         return key;
     }
+
+    public void setLeft(BSTNode left) {
+        this.left = left;
+    }
+
+    public void setRight(BSTNode right) {
+        this.right = right;
+    }
+
+    public BSTNode getLeft() {
+        return left;
+    }
+
+    public BSTNode getRight() {
+        return right;
+    }
+    
     private void print(StringBuilder buffer, 
         String prefix,String childrenPrefix){
         LinkedList<BSTNode> children=new LinkedList<>();
