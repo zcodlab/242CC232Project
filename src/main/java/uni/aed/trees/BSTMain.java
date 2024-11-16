@@ -19,25 +19,25 @@ public class BSTMain {
         tree.inorder(str);
         System.out.println(str.toString());
         
-//        System.out.println("Realizando una llamada preorder:VLR");
-//        str.setLength(0);
-//        tree.preorder(str);
-//        System.out.println(str.toString());
-//        
-//        System.out.println("Realizando una llamada postorder:LRV");
-//        str.setLength(0);
-//        tree.postorder(str);
-//        System.out.println(str.toString());
-//        
-//        System.out.println("Realizando recorrido primero en amplitud");
-//        str.setLength(0);
-//        tree.breadthFirst(str);
-//        System.out.println(str.toString());
-//        
-//        System.out.println("Realizando la busqueda del nodo 17");
-//        str.setLength(0);
-//        tree.visit(tree.search(17), str);
-//        System.out.println(str.toString());
+        System.out.println("Realizando una llamada preorder:VLR");
+        str.setLength(0);
+        tree.preorder(str);
+        System.out.println(str.toString());
+        
+        System.out.println("Realizando una llamada postorder:LRV");
+        str.setLength(0);
+        tree.postorder(str);
+        System.out.println(str.toString());
+        
+        System.out.println("Realizando recorrido primero en amplitud");
+        str.setLength(0);
+        tree.breadthFirst(str);
+        System.out.println(str.toString());
+        
+        System.out.println("Realizando la busqueda del nodo 17");
+        str.setLength(0);
+        tree.visit(tree.search(17), str);
+        System.out.println(str.toString());
         
         System.out.println("Realizando la eliminacion por copiado 1F: nodo hoja 19");
         str.setLength(0);
