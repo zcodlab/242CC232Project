@@ -88,6 +88,44 @@ public class AvlTree {
         }
         return tree.toString();            
     }
-    
+    public int search(int key){
+        if(findAvlTreeNode(root,key)==null)
+            return 0;
+        else
+            return 1;
+    }
+    public void delete(int key){
+        if(findAvlTreeNode(root,key)!=null)
+            root=Remove(root,key);
+    }
+    private AvlTreeNode Remove(AvlTreeNode root,int key){
+        if(root==null)
+            return root;
+        else if(key<root.key)
+            root.left=Remove(root.left,key);
+        else if(key>root.key)
+            root.right=Remove(root.right,key);
+        else{
+            if(root.right==null)
+                root=root.left;
+            else if(root.left==null)
+                root=root.right;
+            else{
+                AvlTreeNode temp=Succesor(root.right);
+                root.key=temp.key;
+                root.right=Remove(root.right,root.key);
+            }   
+        }
+        if(root==null)
+            return root;
+        else
+            return balanceTree(root);                
+    }
+    private AvlTreeNode Succesor(AvlTreeNode root){
+        if(root.left!=null)
+            return Succesor(root.left);
+        else
+            return root;
+    }
             
 }

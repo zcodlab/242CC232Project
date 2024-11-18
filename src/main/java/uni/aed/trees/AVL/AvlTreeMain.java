@@ -14,6 +14,12 @@ public class AvlTreeMain {
         System.out.println(tree.root.toString());
         System.out.println("Realizando el recorrido preOrder");
         System.out.println(tree.preOrder(tree.root));
+        System.out.println("Eliminando nodos en el arbol");
+        tree.delete(20);
+        System.out.println("Despues de Eliminar: Visualizando el arbol");
+        System.out.println(tree.root.toString());
+        System.out.println("Despues de Eliminar: Realizando el recorrido preOrder");
+        System.out.println(tree.preOrder(tree.root));
     }
     
 }
