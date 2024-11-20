@@ -1,0 +1,5 @@
+AdobePhotoshop 7.0 24 580
+NortonSystemWorks 2003 24 50
+NortonUtilities 1.0 40 30
+VisualJ++Professional 6.0 76 100
+VisualJ++Standard 6.0 108 40
