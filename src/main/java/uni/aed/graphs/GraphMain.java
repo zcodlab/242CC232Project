@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import static uni.aed.graphs.DataGraph.*;
+import uni.aed.graphs.TopologicalSort.TopologicalSort;
+import uni.aed.graphs.recubrimiento.Kruskal;
+import uni.aed.graphs.shortestpath.CostPathPair;
+import uni.aed.graphs.shortestpath.Dijkstra;
 
 public class GraphMain {
     private static Scanner scr;
@@ -27,8 +31,12 @@ public class GraphMain {
                 "2.- Grafo Dirigido "+SEPARADOR+
                 "3.- Grafo Dirigido con NegativeWeights "+SEPARADOR+                
                 "4.- Recorrido primero en amplitud "+SEPARADOR+                
-                "5.- Recorrido primero en profundidad "+SEPARADOR+                                
-                "6.- Salir "+SEPARADOR+"Elija una opcion:");                
+                "5.- Recorrido primero en profundidad "+SEPARADOR+                
+                "6.- Dijkstra No Dirigido "+SEPARADOR+                                
+                "7.- Kruskal No Dirigido "+SEPARADOR+                
+                "8.- Prim No Dirigido "+SEPARADOR+
+                "9.- Ordenamiento Topologico con Grafo Dirigido "+SEPARADOR+   
+                "10.- Salir "+SEPARADOR+"Elija una opcion:");                
                 opcion =scr.nextInt();            
                 switch (opcion)
                 {
@@ -36,7 +44,11 @@ public class GraphMain {
                     case 2 -> {getDirectedGraph();}
                     case 3 -> {getDirectedGraphWithNegativeWeights();}                    
                     case 4 -> {BreadthFirstTraversalTestWithAdjacencyMatrix();}                    
-                    case 5 -> {DepthFirstTraversalTestWithAdjacencyMatrix();}                                        
+                    case 5 -> {DepthFirstTraversalTestWithAdjacencyMatrix();}                    
+                    case 6 -> {getDijkstraUndirected();}                    
+                    case 7 -> {getKruskalUndirected();}                    
+                    case 8 -> {getPrimUndirected();}                    
+                    case 9 -> {getTopologicalSortOnDirectedGraph();}
                     default -> {break;}
                 }	            
                 System.out.print("Para continuar con las operaciones pulsa S; Para finalizar pulse N: ");
@@ -182,7 +194,47 @@ public class GraphMain {
         System.out.println("DepthFirstTraversalTestWithGraph");        
         BreadthAndDepthFirstTraversalTestWithGraph(2);
         
-    }    
+    }
     
-   
+    
+    private void getDijkstraUndirected(){
+        UndirectedGraph undirected = new UndirectedGraph();
+        Vertex<Integer> start = undirected.v1;
+        Vertex<Integer> end = undirected.v5;        
+        
+        Map<Vertex<Integer>, CostPathPair<Integer>> map 
+                = Dijkstra.getShortestPaths(undirected.graph, start);
+        
+        // Compare results
+        CostPathPair<Integer> path,pair;
+        System.out.println("****Dijkstra.getShortestPaths del vertice inicial: "+start.getValue()+" ****");
+        for (Vertex<Integer> v : map.keySet()) {
+            System.out.println("v=" + v.getValue());
+            path = map.get(v);
+            System.out.println("Dijkstra's shortest path=" + path);
+        }
+        
+        System.out.println("****Dijkstra.getShortestPath del vertice inicial: "+start.getValue()+" vertice final: "+end.getValue()+" ****");
+        pair = Dijkstra.getShortestPath(undirected.graph, start, end);
+        System.out.println("Ruta desde " + start.getValue() + " to " + 
+                end.getValue()+ " (pair != null)= " + (pair != null));        
+        System.out.println(pair);        
+    }
+    private void getKruskalUndirected(){
+        UndirectedGraph undirected = new UndirectedGraph();
+        CostPathPair<Integer> resultMST = Kruskal.getMinimumSpanningTree(undirected.graph);
+        System.out.println("Kruskal's minimum spanning tree. resultMST=" + resultMST);   
+    }
+    private void getPrimUndirected(){
+        System.out.println("Prim's minimum spanning tree error. pair4|result4="+primUndirected());                
+    }
+    private void getTopologicalSortOnDirectedGraph(){        
+        Graph<Integer> digraph = topologicalSortOnDirectedGraph();
+        List<Vertex<Integer>> result = TopologicalSort.sort(digraph);
+        System.out.println("Los elementos del Digrafo es");
+        System.out.println(digraph.toString());
+        System.out.println("Las aristas del digrafo");
+        System.out.println(digraph.getEdges().toString());
+        System.out.println("Topological sort. results="+result);
+        }
 }

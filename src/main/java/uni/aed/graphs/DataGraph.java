@@ -1,7 +1,9 @@
 package uni.aed.graphs;
 
+import uni.aed.graphs.shortestpath.CostPathPair;
 import java.util.ArrayList;
 import java.util.List;
+import uni.aed.graphs.recubrimiento.Prim;
 
 public class DataGraph {   
     
@@ -171,5 +173,66 @@ public class DataGraph {
     return digraph;
     }    
 
-    
+    public static String primUndirected() {
+        final UndirectedGraph undirected = new UndirectedGraph();
+        Vertex<Integer> start = undirected.v1;        
+        final CostPathPair<Integer> resultMST = Prim.getMinimumSpanningTree(undirected.graph, start);
+
+        // Ideal MST
+        int cost = 35;
+        List<Edge<Integer>> list = new ArrayList<>();
+        list.add(undirected.e1_7);
+        list.add(undirected.e1_8);
+        list.add(undirected.e1_2);
+        list.add(undirected.e1_3);
+        list.add(undirected.e3_6);
+        list.add(new Edge<>(9, undirected.v6, undirected.v5));
+        list.add(new Edge<>(6, undirected.v5, undirected.v4));
+        CostPathPair<Integer> idealMST = new CostPathPair<>(cost, list);
+        System.out.println("Prim's minimum spanning tree error. resultMST="+resultMST+" idealMST="+idealMST);
+
+        // Prim on a graph with cycles
+        final List<Vertex<Integer>> cyclicVerticies = new ArrayList<>();
+        final Vertex<Integer> cv1 = new Vertex<>(1);
+        final Vertex<Integer> cv2 = new Vertex<>(2);
+        final Vertex<Integer> cv3 = new Vertex<>(3);
+        final Vertex<Integer> cv4 = new Vertex<>(4);
+        final Vertex<Integer> cv5 = new Vertex<>(5);
+
+        cyclicVerticies.add(cv1);            
+        cyclicVerticies.add(cv2);            
+        cyclicVerticies.add(cv3);            
+        cyclicVerticies.add(cv4);            
+        cyclicVerticies.add(cv5);
+
+        final List<Edge<Integer>> cyclicEdges = new ArrayList<>();
+        final Edge<Integer> ce1_2 = new Edge<>(3, cv1, cv2);
+        final Edge<Integer> ce2_3 = new Edge<>(2, cv2, cv3);
+        final Edge<Integer> ce3_4 = new Edge<>(4, cv3, cv4);
+        final Edge<Integer> ce4_1 = new Edge<>(1, cv4, cv1);
+        final Edge<Integer> ce4_5 = new Edge<>(1, cv4, cv5);
+
+        cyclicEdges.add(ce1_2);            
+        cyclicEdges.add(ce2_3);            
+        cyclicEdges.add(ce3_4);            
+        cyclicEdges.add(ce4_1);            
+        cyclicEdges.add(ce4_5);
+
+        final Graph<Integer> cyclicUndirected = new Graph<>(Graph.TYPE.UNDIRECTED, cyclicVerticies, cyclicEdges);
+        start = cv1;
+        CostPathPair<Integer> pair4 = Prim.getMinimumSpanningTree(cyclicUndirected, cyclicUndirected.getVertices().get(0));            
+        // Ideal MST
+        cost = 7;
+        List<Edge<Integer>> list4 = new ArrayList<>();
+        list4.add(new Edge<>(1, cv1, cv4));
+        list4.add(ce4_5);
+        list4.add(ce1_2);
+        list4.add(ce2_3);
+        CostPathPair<Integer> result4 = new CostPathPair<>(cost, list4);
+
+        StringBuilder str=new StringBuilder();
+        str.append(pair4);
+        str.append(list4);
+        return str.toString();
+    }
 }
