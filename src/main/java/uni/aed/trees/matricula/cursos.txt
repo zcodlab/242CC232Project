@@ -1,0 +1,5 @@
+Algoritmos CC232 10 20
+IngenieriaDeSoftware CC341 10 20
+DesarrolloSoftware CC3S2 10 20
+SistemasOperativos CC222 10 20
+BaseDeDatos CC202 10 20

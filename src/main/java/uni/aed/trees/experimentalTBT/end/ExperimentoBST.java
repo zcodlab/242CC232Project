@@ -14,17 +14,18 @@ public class ExperimentoBST {
     public static final int NCOMBINACIONES = 8;     // Número de combinaciones
     public static final int NOPERACIONES = 1;      // Número de operaciones a realizar        
     private static final int[] ALTURAS = {4,8,16}; // Alturas objetivo para los árboles
-    private static Scanner scr = new Scanner(System.in);
     private BSTManager bstMgr;
-    private List<Resultado> tabla=new LinkedList<>();        
+    private List<Resultado> tabla=new LinkedList<>();    
     
     public static void main(String[] args) {
         ExperimentoBST exp=new ExperimentoBST();
-        exp.Menu();        
+        exp.Menu();
     }
     
-    public void Menu() {        
+    public void Menu() {
+        Scanner scanner = new Scanner(System.in);
         boolean salir = false;
+
         while (!salir) {            
             tabla.clear();
             System.out.println("\nMenu de Operaciones");
@@ -32,7 +33,7 @@ public class ExperimentoBST {
             System.out.println("2. Operaciones en Arbol AVL");                        
             System.out.println("3. Salir");
             System.out.print("Seleccione una opcion: ");
-            int opcion = scr.nextInt();
+            int opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
@@ -42,16 +43,16 @@ public class ExperimentoBST {
                     subMenu(true);
                     break;                
                 case 3:
-                    scr.close();
                     salir = true;
                     break;
                 default:
                     System.out.println("Opcion no valida.");
             }
-        }        
+        }
     }
 
-    public void subMenu(boolean balanceado) {        
+    public void subMenu(boolean balanceado) {
+        Scanner scanner = new Scanner(System.in);
         boolean salir = false;        
         tabla.clear();
         while (!salir) {
@@ -63,12 +64,12 @@ public class ExperimentoBST {
             System.out.println("5. Salir");
             System.out.print("Seleccione una opcion: ");
 
-            int opcion = scr.nextInt();
+            int opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
                     System.out.print("Ingrese la altura deseada: ");
-                    int h = scr.nextInt();
+                    int h = scanner.nextInt();
                     bstMgr = new BSTManager(balanceado);
                     crearArbolCompletoAleatorio(bstMgr, h);                    
                     break;
@@ -87,7 +88,7 @@ public class ExperimentoBST {
                 default:
                     System.out.println("Opcion no valida.");
             }
-        }        
+        }
     }
 
     public void crearArbolCompletoAleatorio(BSTManager bstMgr, int hRequerida) {

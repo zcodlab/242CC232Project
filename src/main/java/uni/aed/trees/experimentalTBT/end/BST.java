@@ -3,7 +3,7 @@ package uni.aed.trees.experimentalTBT.end;
 public class BST {
     private static final int LONGITUD_CADENA=250000;
     protected boolean AVL=false;
-    private Nodo raiz;
+    protected Nodo raiz;
     private long hRequerida;
     private long initialHeight;
     private long initialIPL;
@@ -18,14 +18,10 @@ public class BST {
         this.AVL=avl;
     }
 
-    public void setRaiz(Nodo raiz) {
-        this.raiz = raiz;
-    }
-
     public void sethRequerida(long hRequerida) {
         this.hRequerida = hRequerida;
     }
-
+    
     public void setInitialHeight(long initialHeight) {
         this.initialHeight = initialHeight;
     }
@@ -56,7 +52,7 @@ public class BST {
 
     public void setFinalBalance(boolean finalBalance) {
         this.finalBalance = finalBalance;
-    }    
+    }
 
     public long gethRequerida() {
         return hRequerida;
