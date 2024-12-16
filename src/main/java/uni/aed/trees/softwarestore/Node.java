@@ -1,10 +1,10 @@
 package uni.aed.trees.softwarestore;
 
 public class Node<E> {
-    E key;
-    int filePosition;
-    Node left;
-    Node right;
+    public E key;
+    public int filePosition;
+    public Node left;
+    public Node right;
 
     public Node(E key, int filePosition) {
         this.key = key;
