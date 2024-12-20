@@ -1,0 +1,3 @@
+CC232   AlgoritmosYEstructurasDeDatos
+CC341   IngenieriaDeSoftware
+CC3S2   DesarrolloSoftware

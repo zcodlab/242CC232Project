@@ -1,0 +1,3 @@
+CC232   A001    JuanPérez
+CC232   A002    MariaGómez
+CC341   A003    PedroLópez
