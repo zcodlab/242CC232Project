@@ -1,0 +1,4 @@
+10	POO	1	9
+20	Algoritmos	1	9
+40	SistemasOperativos	1	5
+60	CalidadSoftware	1	9

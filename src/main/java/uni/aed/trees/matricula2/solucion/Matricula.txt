@@ -1,0 +1,5 @@
+10	A004	Pepe	Lujan
+10	A010	Jaime	Robles
+20	A002	Simon	Perez
+40	A006	Jose	Rojas
+60	A011	Tamara	Falcao
